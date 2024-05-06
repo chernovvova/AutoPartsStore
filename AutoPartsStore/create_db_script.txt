@@ -59,5 +59,23 @@ create trigger ins_new_pr_to_storage
 	on product
 	for each row
 	execute procedure add_pr_to_storage()
+	
+	
+	
+create or replace function delete_pr_from_storage()
+	returns trigger as
+$$
+begin
+	delete from storage where product_id = old.id;
+	return old;
+end;
+$$
+language 'plpgsql';
+
+create or replace trigger del_pr_from_storage
+	before delete
+	on product
+	for each row
+	execute procedure delete_pr_from_storage()
 
 
