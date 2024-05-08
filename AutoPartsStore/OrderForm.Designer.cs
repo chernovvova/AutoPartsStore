@@ -38,6 +38,11 @@
             label1 = new Label();
             label2 = new Label();
             productComboBox = new ComboBox();
+            addProductButton = new Button();
+            countProductTextBox = new TextBox();
+            sumTextBox = new TextBox();
+            label3 = new Label();
+            label4 = new Label();
             ((System.ComponentModel.ISupportInitialize)orderGridView).BeginInit();
             ((System.ComponentModel.ISupportInitialize)productGridView).BeginInit();
             menuStrip1.SuspendLayout();
@@ -46,17 +51,18 @@
             // orderGridView
             // 
             orderGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            orderGridView.Location = new Point(1, 87);
+            orderGridView.Location = new Point(0, 87);
             orderGridView.Name = "orderGridView";
-            orderGridView.Size = new Size(240, 150);
+            orderGridView.Size = new Size(493, 190);
             orderGridView.TabIndex = 0;
+            orderGridView.SelectionChanged += orderGridView_SelectionChanged;
             // 
             // productGridView
             // 
             productGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            productGridView.Location = new Point(471, 87);
+            productGridView.Location = new Point(688, 87);
             productGridView.Name = "productGridView";
-            productGridView.Size = new Size(240, 150);
+            productGridView.Size = new Size(492, 190);
             productGridView.TabIndex = 1;
             // 
             // menuStrip1
@@ -64,7 +70,7 @@
             menuStrip1.Items.AddRange(new ToolStripItem[] { addToolStripMenuItem, updateToolStripMenuItem, deleteToolStripMenuItem });
             menuStrip1.Location = new Point(0, 0);
             menuStrip1.Name = "menuStrip1";
-            menuStrip1.Size = new Size(800, 24);
+            menuStrip1.Size = new Size(1180, 24);
             menuStrip1.TabIndex = 2;
             menuStrip1.Text = "menuStrip1";
             // 
@@ -94,7 +100,7 @@
             clientsComboBox.FormattingEnabled = true;
             clientsComboBox.Location = new Point(12, 320);
             clientsComboBox.Name = "clientsComboBox";
-            clientsComboBox.Size = new Size(121, 23);
+            clientsComboBox.Size = new Size(144, 23);
             clientsComboBox.TabIndex = 3;
             // 
             // label1
@@ -110,7 +116,7 @@
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(485, 302);
+            label2.Location = new Point(688, 302);
             label2.Name = "label2";
             label2.Size = new Size(48, 15);
             label2.TabIndex = 6;
@@ -119,16 +125,65 @@
             // productComboBox
             // 
             productComboBox.FormattingEnabled = true;
-            productComboBox.Location = new Point(485, 320);
+            productComboBox.Location = new Point(688, 320);
             productComboBox.Name = "productComboBox";
             productComboBox.Size = new Size(121, 23);
             productComboBox.TabIndex = 5;
+            productComboBox.SelectedIndexChanged += productComboBox_SelectedIndexChanged;
+            // 
+            // addProductButton
+            // 
+            addProductButton.Location = new Point(688, 369);
+            addProductButton.Name = "addProductButton";
+            addProductButton.Size = new Size(172, 29);
+            addProductButton.TabIndex = 7;
+            addProductButton.Text = "Добавить товар";
+            addProductButton.UseVisualStyleBackColor = true;
+            addProductButton.Click += addProductButton_Click;
+            // 
+            // countProductTextBox
+            // 
+            countProductTextBox.Location = new Point(854, 320);
+            countProductTextBox.Name = "countProductTextBox";
+            countProductTextBox.Size = new Size(122, 23);
+            countProductTextBox.TabIndex = 8;
+            countProductTextBox.TextChanged += countProductTextBox_TextChanged;
+            // 
+            // sumTextBox
+            // 
+            sumTextBox.Location = new Point(1009, 320);
+            sumTextBox.Name = "sumTextBox";
+            sumTextBox.Size = new Size(122, 23);
+            sumTextBox.TabIndex = 9;
+            // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Location = new Point(854, 302);
+            label3.Name = "label3";
+            label3.Size = new Size(72, 15);
+            label3.TabIndex = 10;
+            label3.Text = "Количество";
+            // 
+            // label4
+            // 
+            label4.AutoSize = true;
+            label4.Location = new Point(1009, 302);
+            label4.Name = "label4";
+            label4.Size = new Size(45, 15);
+            label4.TabIndex = 11;
+            label4.Text = "Сумма";
             // 
             // OrderForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
+            ClientSize = new Size(1180, 558);
+            Controls.Add(label4);
+            Controls.Add(label3);
+            Controls.Add(sumTextBox);
+            Controls.Add(countProductTextBox);
+            Controls.Add(addProductButton);
             Controls.Add(label2);
             Controls.Add(productComboBox);
             Controls.Add(label1);
@@ -160,5 +215,10 @@
         private Label label1;
         private Label label2;
         private ComboBox productComboBox;
+        private Button addProductButton;
+        private TextBox countProductTextBox;
+        private TextBox sumTextBox;
+        private Label label3;
+        private Label label4;
     }
 }

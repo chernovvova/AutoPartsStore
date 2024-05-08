@@ -17,6 +17,7 @@ namespace AutoPartsStore
         int id;
         int client_id;
         int product_id;
+        int product_price;
         DataTable clientsDataTable;
         DataSet clientsDataSet;
         DataTable orderInfoDataTable;
@@ -52,7 +53,7 @@ namespace AutoPartsStore
             string request = "SELECT id, name FROM client";
 
             NpgsqlCommand command = new NpgsqlCommand(request, con);
-            
+
             using (NpgsqlDataReader reader = command.ExecuteReader())
             {
                 while (reader.Read())
@@ -88,7 +89,7 @@ namespace AutoPartsStore
 
             List<Product> products = new List<Product>();
 
-            string request = "SELECT id, name FROM product";
+            string request = "SELECT id, name, price FROM product";
             NpgsqlCommand command = new NpgsqlCommand(request, con);
             using (NpgsqlDataReader reader = command.ExecuteReader())
             {
@@ -96,8 +97,9 @@ namespace AutoPartsStore
                 {
                     int id = Convert.ToInt32(reader["id"].ToString());
                     string name = reader["name"].ToString();
+                    int price = Convert.ToInt32(reader["price"].ToString());
 
-                    Product product = new Product(id, name);
+                    Product product = new Product(id, name, price);
                     products.Add(product);
                 }
             }
@@ -107,14 +109,13 @@ namespace AutoPartsStore
             productComboBox.ValueMember = "id";
         }
 
-        private void OrderForm_Load(object sender, EventArgs e)
-        {
-
-        }
 
         private void addToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            try
+            {
+                string sql = string.Format("INSERT INTO orderr VALUES")
+            }
         }
 
         private void updateToolStripMenuItem_Click(object sender, EventArgs e)
@@ -142,15 +143,66 @@ namespace AutoPartsStore
         {
             public int id { get; set; }
             public string name { get; set; }
+            public int price { get; set; }
 
-            public Product(int id, string name)
+
+            public Product(int id, string name, int price)
             {
                 this.id = id;
                 this.name = name;
-            }   
+                this.price = price;
+            }
         }
 
+
+        private void addProductButton_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                int count = Convert.ToInt32(countProductTextBox.Text);
+
+                string sql = string.Format("INSERT INTO order_info (order_id, product_id, count, price, payment_status, delivery_status) VALUES ('{0}', '{1}', '{2}', '{3}', '{4}', '{5}')",
+                    id, product_id, count, product_price * count, "Не оплачено", "Не доставлено");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void orderGridView_SelectionChanged(object sender, EventArgs e)
+        {
+            DataGridViewSelectedRowCollection selectedRow = orderGridView.SelectedRows;
+            if (selectedRow.Count > 0)
+            {
+                DataGridViewRow dataGridViewRow = selectedRow[0];
+                id = Convert.ToInt32(dataGridViewRow.Cells["id"].Value);
+            }
+
+        }
+
+        private void countProductTextBox_TextChanged(object sender, EventArgs e)
+        {
+            int count = 0;
+            if (int.TryParse(countProductTextBox.Text, out count))
+            {
+                sumTextBox.Text = Convert.ToString(count * product_price);
+            }
+            else
+            {
+                sumTextBox.Text = "";
+            }
+        }
+
+        private void productComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            product_price = ((Product)productComboBox.SelectedItem).price;
+        }
         private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+        private void OrderForm_Load(object sender, EventArgs e)
         {
 
         }
