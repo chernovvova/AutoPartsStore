@@ -43,6 +43,8 @@
             sumTextBox = new TextBox();
             label3 = new Label();
             label4 = new Label();
+            label5 = new Label();
+            addressTextBox = new TextBox();
             ((System.ComponentModel.ISupportInitialize)orderGridView).BeginInit();
             ((System.ComponentModel.ISupportInitialize)productGridView).BeginInit();
             menuStrip1.SuspendLayout();
@@ -102,15 +104,16 @@
             clientsComboBox.Name = "clientsComboBox";
             clientsComboBox.Size = new Size(144, 23);
             clientsComboBox.TabIndex = 3;
+            clientsComboBox.SelectedIndexChanged += clientsComboBox_SelectedIndexChanged;
             // 
             // label1
             // 
             label1.AutoSize = true;
             label1.Location = new Point(12, 302);
             label1.Name = "label1";
-            label1.Size = new Size(55, 15);
+            label1.Size = new Size(46, 15);
             label1.TabIndex = 4;
-            label1.Text = "Клиенты";
+            label1.Text = "Клиент";
             label1.Click += label1_Click;
             // 
             // label2
@@ -174,11 +177,29 @@
             label4.TabIndex = 11;
             label4.Text = "Сумма";
             // 
+            // label5
+            // 
+            label5.AutoSize = true;
+            label5.Location = new Point(191, 302);
+            label5.Name = "label5";
+            label5.Size = new Size(40, 15);
+            label5.TabIndex = 12;
+            label5.Text = "Адрес";
+            // 
+            // addressTextBox
+            // 
+            addressTextBox.Location = new Point(191, 320);
+            addressTextBox.Name = "addressTextBox";
+            addressTextBox.Size = new Size(135, 23);
+            addressTextBox.TabIndex = 13;
+            // 
             // OrderForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1180, 558);
+            Controls.Add(addressTextBox);
+            Controls.Add(label5);
             Controls.Add(label4);
             Controls.Add(label3);
             Controls.Add(sumTextBox);
@@ -220,5 +241,7 @@
         private TextBox sumTextBox;
         private Label label3;
         private Label label4;
+        private Label label5;
+        private TextBox addressTextBox;
     }
 }

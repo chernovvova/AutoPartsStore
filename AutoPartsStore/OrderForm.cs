@@ -114,7 +114,14 @@ namespace AutoPartsStore
         {
             try
             {
-                string sql = string.Format("INSERT INTO orderr VALUES")
+                string sql = string.Format("INSERT INTO orderr (client_id, order_address, total_price, order_date, order_status) VALUES ('{0}', '{1}', '{2}', '{3}', '{4}')", client_id, addressTextBox.Text, 0, DateTime.Now, "не выполнен");
+                NpgsqlCommand command = new NpgsqlCommand(sql, con);
+                command.ExecuteNonQuery();
+                UpdateOrders();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
             }
         }
 
@@ -163,11 +170,15 @@ namespace AutoPartsStore
 
                 string sql = string.Format("INSERT INTO order_info (order_id, product_id, count, price, payment_status, delivery_status) VALUES ('{0}', '{1}', '{2}', '{3}', '{4}', '{5}')",
                     id, product_id, count, product_price * count, "Не оплачено", "Не доставлено");
+                NpgsqlCommand command = new NpgsqlCommand(sql, con);
+                command.ExecuteNonQuery();
+                UpdateProducts();
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
+
         }
 
         private void orderGridView_SelectionChanged(object sender, EventArgs e)
@@ -196,7 +207,12 @@ namespace AutoPartsStore
 
         private void productComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
+            product_id = ((Product)productComboBox.SelectedItem).id;
             product_price = ((Product)productComboBox.SelectedItem).price;
+        }
+        private void clientsComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            client_id = ((Client)clientsComboBox.SelectedItem).id;
         }
         private void label1_Click(object sender, EventArgs e)
         {
@@ -206,5 +222,6 @@ namespace AutoPartsStore
         {
 
         }
+
     }
 }
