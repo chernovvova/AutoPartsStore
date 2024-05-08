@@ -136,7 +136,7 @@
             // 
             // addProductButton
             // 
-            addProductButton.Location = new Point(688, 369);
+            addProductButton.Location = new Point(688, 360);
             addProductButton.Name = "addProductButton";
             addProductButton.Size = new Size(172, 29);
             addProductButton.TabIndex = 7;

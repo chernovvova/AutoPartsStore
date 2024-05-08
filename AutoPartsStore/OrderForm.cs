@@ -132,7 +132,29 @@ namespace AutoPartsStore
 
         private void deleteToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            DataGridViewSelectedRowCollection selectedRows = orderGridView.SelectedRows;
 
+            if(selectedRows.Count > 0)
+            {
+                DataGridViewRow selectedRow = selectedRows[0];
+                try
+                {
+                    int id = Convert.ToInt32(selectedRow.Cells["id"].Value);
+                    string sql = string.Format("DELETE FROM order_info WHERE order_id = '{0}'" , id);
+                    NpgsqlCommand command = new NpgsqlCommand(sql, con);
+                    command.ExecuteNonQuery();
+
+                    sql = string.Format("DELETE FROM orderr WHERE id = '{0}'", id);
+                    command = new NpgsqlCommand(sql, con);
+                    command.ExecuteNonQuery();
+                    UpdateOrders();
+                    UpdateProducts();
+                }
+                catch(Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+            }
         }
 
         public class Client
