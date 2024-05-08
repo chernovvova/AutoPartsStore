@@ -103,7 +103,6 @@ namespace AutoPartsStore
                     products.Add(product);
                 }
             }
-
             productComboBox.DataSource = products;
             productComboBox.DisplayMember = "name";
             productComboBox.ValueMember = "id";
@@ -114,7 +113,8 @@ namespace AutoPartsStore
         {
             try
             {
-                string sql = string.Format("INSERT INTO orderr (client_id, order_address, total_price, order_date, order_status) VALUES ('{0}', '{1}', '{2}', '{3}', '{4}')", client_id, addressTextBox.Text, 0, DateTime.Now, "не выполнен");
+                string sql = string.Format("INSERT INTO orderr (client_id, order_address, total_price, order_date, order_status) VALUES ('{0}', '{1}', '{2}', '{3}', '{4}')",
+                    client_id, addressTextBox.Text, 0, DateTime.Now, "не выполнен");
                 NpgsqlCommand command = new NpgsqlCommand(sql, con);
                 command.ExecuteNonQuery();
                 UpdateOrders();
@@ -127,11 +127,23 @@ namespace AutoPartsStore
 
         private void updateToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            try
+            {
+                string sql = string.Format("UPDATE orderr SET address = '{0}' WHERE id = '{1}'", addressTextBox.Text, id);
+                NpgsqlCommand command = new NpgsqlCommand(sql, con);
+                command.ExecuteNonQuery();
+                UpdateOrders();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         private void deleteToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            string message = "";
+            string caption = "";
             DataGridViewSelectedRowCollection selectedRows = orderGridView.SelectedRows;
 
             if(selectedRows.Count > 0)
