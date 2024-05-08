@@ -173,6 +173,7 @@ namespace AutoPartsStore
                 NpgsqlCommand command = new NpgsqlCommand(sql, con);
                 command.ExecuteNonQuery();
                 UpdateProducts();
+                UpdateOrders();
             }
             catch (Exception ex)
             {

@@ -156,6 +156,7 @@
             // 
             sumTextBox.Location = new Point(1009, 320);
             sumTextBox.Name = "sumTextBox";
+            sumTextBox.ReadOnly = true;
             sumTextBox.Size = new Size(122, 23);
             sumTextBox.TabIndex = 9;
             // 

@@ -79,3 +79,35 @@ create or replace trigger del_pr_from_storage
 	execute procedure delete_pr_from_storage()
 
 
+create or replace function upd_total_price_on_insert()
+	returns trigger as
+$$
+begin
+	update orderr set total_price = total_price + new.price where id = new.order_id;
+	return new;
+end;
+$$
+language 'plpgsql';
+
+create or replace trigger upd_order_total_price_on_insert
+	after insert
+	on order_info
+	for each row
+	execute procedure upd_total_price_on_insert();
+
+
+create or replace function upd_total_price_on_delete()
+	returns trigger as
+$$
+begin
+	update orderr set total_price = total_price - old.price where id = old.order_id;
+	return old;
+end;
+$$
+language 'plpgsql';
+
+create or replace trigger upd_order_total_price_on_delete
+	before delete
+	on order_info
+	for each row
+	execute procedure upd_total_price_on_delete();
