@@ -81,11 +81,11 @@ namespace AutoPartsStore
             orderInfoDataTable = orderInfoDataSet.Tables[0];
             productGridView.DataSource = orderInfoDataTable;
             productGridView.Columns[0].HeaderText = "Номер заказа";
-            productGridView.Columns[0].HeaderText = "Название товара";
-            productGridView.Columns[0].HeaderText = "Количество";
-            productGridView.Columns[0].HeaderText = "Цена";
-            productGridView.Columns[0].HeaderText = "Статус оплаты";
-            productGridView.Columns[0].HeaderText = "Статус доставки";
+            productGridView.Columns[1].HeaderText = "Название товара";
+            productGridView.Columns[2].HeaderText = "Количество";
+            productGridView.Columns[3].HeaderText = "Цена";
+            productGridView.Columns[4].HeaderText = "Статус оплаты";
+            productGridView.Columns[5].HeaderText = "Статус доставки";
 
             List<Product> products = new List<Product>();
 
