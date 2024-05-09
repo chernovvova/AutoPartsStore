@@ -14,7 +14,7 @@ namespace AutoPartsStore
     public partial class OrderForm : Form
     {
         NpgsqlConnection con;
-        int id;
+        int id = -1;
         int client_id;
         int product_id;
         int product_price;
@@ -41,6 +41,7 @@ namespace AutoPartsStore
             clientsDataSet.Reset();
             dataAdapter.Fill(clientsDataSet);
             clientsDataTable = clientsDataSet.Tables[0];
+
             orderGridView.DataSource = clientsDataTable;
             orderGridView.Columns[0].HeaderText = "Номер заказа";
             orderGridView.Columns[1].HeaderText = "Имя клиента";
@@ -50,6 +51,7 @@ namespace AutoPartsStore
             orderGridView.Columns[5].HeaderText = "Статус заказа";
 
             List<Client> clients = new List<Client>();
+            Dictionary<int, string> clientsDict = new Dictionary<int, string>();
             string request = "SELECT id, name FROM client";
 
             NpgsqlCommand command = new NpgsqlCommand(request, con);
@@ -69,11 +71,12 @@ namespace AutoPartsStore
             clientsComboBox.DataSource = clients;
             clientsComboBox.DisplayMember = "name";
             clientsComboBox.ValueMember = "id";
+
         }
 
         public void UpdateProducts()
         {
-            string sql = "SELECT * FROM order_info";
+            string sql = string.Format("SELECT * FROM order_info WHERE order_id = '{0}'", id);
             NpgsqlDataAdapter dataAdapter = new NpgsqlDataAdapter(sql, con);
             orderInfoDataSet.Reset();
             dataAdapter.Fill(orderInfoDataSet);
@@ -146,13 +149,13 @@ namespace AutoPartsStore
             string caption = "";
             DataGridViewSelectedRowCollection selectedRows = orderGridView.SelectedRows;
 
-            if(selectedRows.Count > 0)
+            if (selectedRows.Count > 0)
             {
                 DataGridViewRow selectedRow = selectedRows[0];
                 try
                 {
                     int id = Convert.ToInt32(selectedRow.Cells["id"].Value);
-                    string sql = string.Format("DELETE FROM order_info WHERE order_id = '{0}'" , id);
+                    string sql = string.Format("DELETE FROM order_info WHERE order_id = '{0}'", id);
                     NpgsqlCommand command = new NpgsqlCommand(sql, con);
                     command.ExecuteNonQuery();
 
@@ -162,7 +165,7 @@ namespace AutoPartsStore
                     UpdateOrders();
                     UpdateProducts();
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
                     MessageBox.Show(ex.Message);
                 }
@@ -223,8 +226,9 @@ namespace AutoPartsStore
             {
                 DataGridViewRow dataGridViewRow = selectedRow[0];
                 id = Convert.ToInt32(dataGridViewRow.Cells["id"].Value);
+                UpdateProducts();
             }
-
+            
         }
 
         private void countProductTextBox_TextChanged(object sender, EventArgs e)
@@ -258,5 +262,9 @@ namespace AutoPartsStore
 
         }
 
+        private void orderGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
     }
 }

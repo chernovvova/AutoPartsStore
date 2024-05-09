@@ -57,6 +57,7 @@
             orderGridView.Name = "orderGridView";
             orderGridView.Size = new Size(493, 190);
             orderGridView.TabIndex = 0;
+            orderGridView.CellContentClick += orderGridView_CellContentClick;
             orderGridView.SelectionChanged += orderGridView_SelectionChanged;
             // 
             // productGridView

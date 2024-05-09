@@ -51,7 +51,8 @@ namespace AutoPartsStore
 
         private void orderInfoButton_Click(object sender, EventArgs e)
         {
-
+            OrderInfoForm orderInfoForm = new OrderInfoForm(con);
+            orderInfoForm.ShowDialog();
         }
     }
 }
