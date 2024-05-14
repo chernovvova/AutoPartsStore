@@ -60,5 +60,10 @@ namespace AutoPartsStore
         {
 
         }
+
+        private void OrderInfoForm_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

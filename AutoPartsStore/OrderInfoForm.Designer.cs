@@ -60,6 +60,7 @@
             MainMenuStrip = menuStrip1;
             Name = "OrderInfoForm";
             Text = "OrderInfoForm";
+            Load += OrderInfoForm_Load;
             ((System.ComponentModel.ISupportInitialize)orderInfoGridView).EndInit();
             ResumeLayout(false);
             PerformLayout();

@@ -1,4 +1,5 @@
-﻿namespace AutoPartsStore
+﻿
+namespace AutoPartsStore
 {
     partial class OrderForm
     {
@@ -45,6 +46,8 @@
             label4 = new Label();
             label5 = new Label();
             addressTextBox = new TextBox();
+            paymentButton = new Button();
+            exportToExcel = new Button();
             ((System.ComponentModel.ISupportInitialize)orderGridView).BeginInit();
             ((System.ComponentModel.ISupportInitialize)productGridView).BeginInit();
             menuStrip1.SuspendLayout();
@@ -55,18 +58,20 @@
             orderGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             orderGridView.Location = new Point(0, 87);
             orderGridView.Name = "orderGridView";
-            orderGridView.Size = new Size(493, 190);
+            orderGridView.Size = new Size(549, 190);
             orderGridView.TabIndex = 0;
             orderGridView.CellContentClick += orderGridView_CellContentClick;
             orderGridView.SelectionChanged += orderGridView_SelectionChanged;
             // 
             // productGridView
             // 
+            productGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.ColumnHeader;
             productGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            productGridView.Location = new Point(688, 87);
+            productGridView.Location = new Point(641, 87);
             productGridView.Name = "productGridView";
-            productGridView.Size = new Size(492, 190);
+            productGridView.Size = new Size(539, 190);
             productGridView.TabIndex = 1;
+            productGridView.SelectionChanged += productGridView_SelectionChanged;
             // 
             // menuStrip1
             // 
@@ -120,16 +125,17 @@
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(688, 302);
+            label2.Location = new Point(641, 302);
             label2.Name = "label2";
             label2.Size = new Size(48, 15);
             label2.TabIndex = 6;
             label2.Text = "Товары";
+            label2.Click += label2_Click;
             // 
             // productComboBox
             // 
             productComboBox.FormattingEnabled = true;
-            productComboBox.Location = new Point(688, 320);
+            productComboBox.Location = new Point(641, 320);
             productComboBox.Name = "productComboBox";
             productComboBox.Size = new Size(121, 23);
             productComboBox.TabIndex = 5;
@@ -137,7 +143,7 @@
             // 
             // addProductButton
             // 
-            addProductButton.Location = new Point(688, 360);
+            addProductButton.Location = new Point(641, 360);
             addProductButton.Name = "addProductButton";
             addProductButton.Size = new Size(172, 29);
             addProductButton.TabIndex = 7;
@@ -147,7 +153,7 @@
             // 
             // countProductTextBox
             // 
-            countProductTextBox.Location = new Point(854, 320);
+            countProductTextBox.Location = new Point(807, 320);
             countProductTextBox.Name = "countProductTextBox";
             countProductTextBox.Size = new Size(122, 23);
             countProductTextBox.TabIndex = 8;
@@ -155,29 +161,32 @@
             // 
             // sumTextBox
             // 
-            sumTextBox.Location = new Point(1009, 320);
+            sumTextBox.Location = new Point(962, 320);
             sumTextBox.Name = "sumTextBox";
             sumTextBox.ReadOnly = true;
             sumTextBox.Size = new Size(122, 23);
             sumTextBox.TabIndex = 9;
+            sumTextBox.TextChanged += sumTextBox_TextChanged;
             // 
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(854, 302);
+            label3.Location = new Point(807, 302);
             label3.Name = "label3";
             label3.Size = new Size(72, 15);
             label3.TabIndex = 10;
             label3.Text = "Количество";
+            label3.Click += label3_Click;
             // 
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new Point(1009, 302);
+            label4.Location = new Point(962, 302);
             label4.Name = "label4";
             label4.Size = new Size(45, 15);
             label4.TabIndex = 11;
             label4.Text = "Сумма";
+            label4.Click += label4_Click;
             // 
             // label5
             // 
@@ -195,11 +204,33 @@
             addressTextBox.Size = new Size(135, 23);
             addressTextBox.TabIndex = 13;
             // 
+            // paymentButton
+            // 
+            paymentButton.Location = new Point(962, 360);
+            paymentButton.Name = "paymentButton";
+            paymentButton.Size = new Size(144, 29);
+            paymentButton.TabIndex = 14;
+            paymentButton.Text = "Товар оплачен";
+            paymentButton.UseVisualStyleBackColor = true;
+            paymentButton.Click += paymentButton_Click;
+            // 
+            // exportToExcel
+            // 
+            exportToExcel.Location = new Point(12, 502);
+            exportToExcel.Name = "exportToExcel";
+            exportToExcel.Size = new Size(98, 44);
+            exportToExcel.TabIndex = 15;
+            exportToExcel.Text = "Экспорт данных в Excel";
+            exportToExcel.UseVisualStyleBackColor = true;
+            exportToExcel.Click += exportToExcelButton;
+            // 
             // OrderForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1180, 558);
+            Controls.Add(exportToExcel);
+            Controls.Add(paymentButton);
             Controls.Add(addressTextBox);
             Controls.Add(label5);
             Controls.Add(label4);
@@ -226,6 +257,26 @@
             PerformLayout();
         }
 
+        private void label4_Click(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void label3_Click(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void sumTextBox_TextChanged(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void label2_Click(object sender, EventArgs e)
+        {
+            
+        }
+
         #endregion
 
         private DataGridView orderGridView;
@@ -245,5 +296,7 @@
         private Label label4;
         private Label label5;
         private TextBox addressTextBox;
+        private Button paymentButton;
+        private Button exportToExcel;
     }
 }
