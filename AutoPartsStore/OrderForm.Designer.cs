@@ -252,7 +252,7 @@ namespace AutoPartsStore
             // 
             // sendOrder
             // 
-            sendOrder.Location = new Point(527, 311);
+            sendOrder.Location = new Point(518, 313);
             sendOrder.Name = "sendOrder";
             sendOrder.Size = new Size(192, 38);
             sendOrder.TabIndex = 18;
