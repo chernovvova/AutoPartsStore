@@ -57,6 +57,8 @@
             // 
             // currentOrders
             // 
+            currentOrders.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            currentOrders.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
             currentOrders.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             currentOrders.Location = new Point(727, 27);
             currentOrders.Name = "currentOrders";

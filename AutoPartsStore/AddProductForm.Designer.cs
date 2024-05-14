@@ -41,21 +41,21 @@
             // 
             // name
             // 
-            name.Location = new Point(331, 107);
+            name.Location = new Point(309, 108);
             name.Name = "name";
             name.Size = new Size(175, 23);
             name.TabIndex = 0;
             // 
             // price
             // 
-            price.Location = new Point(331, 311);
+            price.Location = new Point(309, 312);
             price.Name = "price";
             price.Size = new Size(175, 23);
             price.TabIndex = 2;
             // 
             // addButton
             // 
-            addButton.Location = new Point(258, 360);
+            addButton.Location = new Point(236, 361);
             addButton.Name = "addButton";
             addButton.Size = new Size(75, 23);
             addButton.TabIndex = 3;
@@ -65,7 +65,7 @@
             // 
             // cancelButton
             // 
-            cancelButton.Location = new Point(505, 360);
+            cancelButton.Location = new Point(483, 361);
             cancelButton.Name = "cancelButton";
             cancelButton.Size = new Size(75, 23);
             cancelButton.TabIndex = 4;
@@ -76,7 +76,7 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(331, 89);
+            label1.Location = new Point(309, 90);
             label1.Name = "label1";
             label1.Size = new Size(99, 15);
             label1.TabIndex = 5;
@@ -85,7 +85,7 @@
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(331, 142);
+            label2.Location = new Point(309, 143);
             label2.Name = "label2";
             label2.Size = new Size(62, 15);
             label2.TabIndex = 6;
@@ -94,7 +94,7 @@
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(331, 293);
+            label3.Location = new Point(309, 294);
             label3.Name = "label3";
             label3.Size = new Size(35, 15);
             label3.TabIndex = 7;
@@ -102,7 +102,7 @@
             // 
             // description
             // 
-            description.Location = new Point(331, 160);
+            description.Location = new Point(309, 161);
             description.Name = "description";
             description.Size = new Size(175, 117);
             description.TabIndex = 8;
@@ -112,7 +112,7 @@
             // 
             label4.AutoSize = true;
             label4.Font = new Font("Segoe UI", 14F, FontStyle.Regular, GraphicsUnit.Point);
-            label4.Location = new Point(331, 41);
+            label4.Location = new Point(309, 42);
             label4.Name = "label4";
             label4.Size = new Size(151, 25);
             label4.TabIndex = 9;
