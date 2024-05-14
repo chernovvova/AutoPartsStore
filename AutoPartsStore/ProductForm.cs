@@ -119,5 +119,19 @@ namespace AutoPartsStore
 
         }
 
+        private void price_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void name_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void description_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

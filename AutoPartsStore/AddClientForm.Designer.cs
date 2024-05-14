@@ -36,25 +36,26 @@
             label3 = new Label();
             addButton = new Button();
             clearButton = new Button();
+            label4 = new Label();
             SuspendLayout();
             // 
             // name
             // 
-            name.Location = new Point(291, 149);
+            name.Location = new Point(308, 149);
             name.Name = "name";
             name.Size = new Size(160, 23);
             name.TabIndex = 0;
             // 
             // telephone
             // 
-            telephone.Location = new Point(291, 206);
+            telephone.Location = new Point(308, 206);
             telephone.Name = "telephone";
             telephone.Size = new Size(160, 23);
             telephone.TabIndex = 1;
             // 
             // email
             // 
-            email.Location = new Point(291, 264);
+            email.Location = new Point(308, 264);
             email.Name = "email";
             email.Size = new Size(160, 23);
             email.TabIndex = 2;
@@ -62,7 +63,7 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(291, 131);
+            label1.Location = new Point(308, 131);
             label1.Name = "label1";
             label1.Size = new Size(31, 15);
             label1.TabIndex = 3;
@@ -72,7 +73,7 @@
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(291, 188);
+            label2.Location = new Point(308, 188);
             label2.Name = "label2";
             label2.Size = new Size(101, 15);
             label2.TabIndex = 4;
@@ -81,7 +82,7 @@
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(291, 246);
+            label3.Location = new Point(308, 246);
             label3.Name = "label3";
             label3.Size = new Size(41, 15);
             label3.TabIndex = 5;
@@ -89,7 +90,7 @@
             // 
             // addButton
             // 
-            addButton.Location = new Point(247, 320);
+            addButton.Location = new Point(264, 320);
             addButton.Name = "addButton";
             addButton.Size = new Size(75, 23);
             addButton.TabIndex = 6;
@@ -99,19 +100,30 @@
             // 
             // clearButton
             // 
-            clearButton.Location = new Point(419, 320);
+            clearButton.Location = new Point(436, 320);
             clearButton.Name = "clearButton";
             clearButton.Size = new Size(75, 23);
             clearButton.TabIndex = 7;
-            clearButton.Text = "Очистить";
+            clearButton.Text = "Отмена";
             clearButton.UseVisualStyleBackColor = true;
             clearButton.Click += clearButton_Click;
+            // 
+            // label4
+            // 
+            label4.AutoSize = true;
+            label4.Font = new Font("Segoe UI", 14F, FontStyle.Regular, GraphicsUnit.Point);
+            label4.Location = new Point(298, 82);
+            label4.Name = "label4";
+            label4.Size = new Size(170, 25);
+            label4.TabIndex = 8;
+            label4.Text = "Добавить клиента";
             // 
             // AddClientForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(label4);
             Controls.Add(clearButton);
             Controls.Add(addButton);
             Controls.Add(label3);
@@ -137,5 +149,6 @@
         private Label label3;
         private Button addButton;
         private Button clearButton;
+        private Label label4;
     }
 }

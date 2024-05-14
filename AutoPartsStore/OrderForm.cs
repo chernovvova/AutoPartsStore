@@ -134,7 +134,7 @@ namespace AutoPartsStore
         {
             try
             {
-                string sql = string.Format("UPDATE orderr SET address = '{0}' WHERE id = '{1}'", addressTextBox.Text, id);
+                string sql = string.Format("UPDATE orderr SET order_address = '{0}' WHERE id = '{1}'", addressTextBox.Text, id);
                 NpgsqlCommand command = new NpgsqlCommand(sql, con);
                 command.ExecuteNonQuery();
                 UpdateOrders();
@@ -147,44 +147,52 @@ namespace AutoPartsStore
 
         private void deleteToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            string message = "";
-            string caption = "";
-            DataGridViewSelectedRowCollection selectedRows = orderGridView.SelectedRows;
-
-            if (selectedRows.Count > 0)
+            string message = "Вы точно хотите удалить?";
+            string caption = "Подтверждение операции";
+            var result = MessageBox.Show(message, caption, MessageBoxButtons.YesNo);
+            if (result == DialogResult.Yes)
             {
-                DataGridViewRow selectedRow = selectedRows[0];
-                try
+                DataGridViewSelectedRowCollection selectedRows = orderGridView.SelectedRows;
+
+                if (selectedRows.Count > 0)
                 {
-                    int id = Convert.ToInt32(selectedRow.Cells["id"].Value);
-                    if(selectedRow.Cells["delivery_status"].Value == "Не выполнен")
+                    DataGridViewRow selectedRow = selectedRows[0];
+                    try
                     {
-                        string products_req = string.Format("SELECT product_id, count FROM order_info WHERE order_id = '{0}'", id);
-                        NpgsqlCommand products_command = new NpgsqlCommand(products_req, con);
-                        using(NpgsqlDataReader reader = products_command.ExecuteReader())
+                        int id = Convert.ToInt32(selectedRow.Cells["id"].Value);
+                        if (Convert.ToString(selectedRow.Cells["order_status"].Value) == "Не выполнен")
                         {
-                            while (reader.Read())
+                            string products_req = string.Format("SELECT product_id, count FROM order_info WHERE order_id = '{0}' AND delivery_status = 'Доставлено'", id);
+                            NpgsqlCommand products_command = new NpgsqlCommand(products_req, con);
+                            Dictionary<int, int> products = new Dictionary<int, int>();
+                            using (NpgsqlDataReader reader = products_command.ExecuteReader())
                             {
-                                string storage_req = string.Format("UPDATE storage SET count = count - '{0}' WHERE id = '{1}'", Convert.ToInt32(reader["count"]), Convert.ToInt32(reader["product_id"]));
+                                while (reader.Read())
+                                {
+                                    products.Add(Convert.ToInt32(reader["product_id"]), Convert.ToInt32(reader["count"]));
+                                }
+                            }
+                            foreach (KeyValuePair<int, int> entry in products)
+                            {
+                                string storage_req = string.Format("UPDATE storage SET count = count + '{0}', last_update_date = '{1}' WHERE product_id = '{2}'", entry.Value, DateTime.Now, entry.Key);
                                 NpgsqlCommand storage_command = new NpgsqlCommand(storage_req, con);
                                 storage_command.ExecuteNonQuery();
-
                             }
                         }
-                    }
-                    string sql = string.Format("DELETE FROM order_info WHERE order_id = '{0}'", id);
-                    NpgsqlCommand command = new NpgsqlCommand(sql, con);
-                    command.ExecuteNonQuery();
+                        string sql = string.Format("DELETE FROM order_info WHERE order_id = '{0}'", id);
+                        NpgsqlCommand command = new NpgsqlCommand(sql, con);
+                        command.ExecuteNonQuery();
 
-                    sql = string.Format("DELETE FROM orderr WHERE id = '{0}'", id);
-                    command = new NpgsqlCommand(sql, con);
-                    command.ExecuteNonQuery();
-                    UpdateOrders();
-                    UpdateProducts();
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message);
+                        sql = string.Format("DELETE FROM orderr WHERE id = '{0}'", id);
+                        command = new NpgsqlCommand(sql, con);
+                        command.ExecuteNonQuery();
+                        UpdateOrders();
+                        UpdateProducts();
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message);
+                    }
                 }
             }
         }
@@ -225,11 +233,10 @@ namespace AutoPartsStore
                 string storage_req = string.Format("SELECT count FROM storage WHERE product_id = '{0}'", product_id);
                 NpgsqlCommand storage_command = new NpgsqlCommand(storage_req, con);
                 int count_on_storage = Convert.ToInt32(storage_command.ExecuteScalar());
-                MessageBox.Show(count_on_storage.ToString());
-                if (count_on_storage > count)
+                if (count_on_storage >= count)
                 {
                     delivery_status = "Доставлено";
-                    string storage_update_req = string.Format("UPDATE storage SET count = '{0}' WHERE product_id = '{1}'", count_on_storage - count, product_id);
+                    string storage_update_req = string.Format("UPDATE storage SET count = '{0}', last_update_date = '{1}' WHERE product_id = '{2}'", count_on_storage - count, DateTime.Now, product_id);
                     NpgsqlCommand storage_update_command = new NpgsqlCommand(storage_update_req, con);
                     storage_update_command.ExecuteNonQuery();
                 }
@@ -307,19 +314,6 @@ namespace AutoPartsStore
                 girdview_product_id = Convert.ToInt32(row.Cells[1].Value);
             }
         }
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-        private void OrderForm_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void orderGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
 
         private void exportToExcelButton(object sender, EventArgs e)
         {
@@ -340,11 +334,11 @@ namespace AutoPartsStore
             workSheet.Cells[1, 8] = "Статус доставки";
             workSheet.Cells[1, 9] = "Статус оплаты";
 
-            Excel.Range header = (Excel.Range) workSheet.Range[workSheet.Cells[1, 1], workSheet.Cells[1, 9]];
+            Excel.Range header = (Excel.Range)workSheet.Range[workSheet.Cells[1, 1], workSheet.Cells[1, 9]];
             header.Cells.Font.Size = 14;
             header.Interior.Color = System.Drawing.ColorTranslator.ToOle(System.Drawing.Color.LightGreen);
             header.Borders.LineStyle = Excel.XlLineStyle.xlContinuous;
-            
+
 
             string sql = string.Format(@"SELECT order_id, client_id, client_name, product_id, product_name, count, price, payment_status, delivery_status
                                          FROM ((order_info oi JOIN orderr o ON oi.order_id = o.id) AS orders
@@ -354,7 +348,7 @@ namespace AutoPartsStore
             using (NpgsqlDataReader reader = command.ExecuteReader())
             {
                 int row = 1;
-                while (reader.Read()) 
+                while (reader.Read())
                 {
                     row++;
                     workSheet.Cells[row, 1] = Convert.ToInt32(reader["order_id"]);
@@ -381,6 +375,61 @@ namespace AutoPartsStore
             workSheet.Columns[7].AutoFit();
             workSheet.Columns[8].AutoFit();
             workSheet.Columns[9].AutoFit();
+        }
+
+        private void sendOrder_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                string select_sql = string.Format("SELECT delivery_status, payment_status FROM order_info WHERE order_id = '{0}'", id);
+                NpgsqlCommand select_command = new NpgsqlCommand(select_sql, con);
+
+                int count = 0;
+                int count_rows = 0;
+
+                using (NpgsqlDataReader reader = select_command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        count_rows++;
+                        if (Convert.ToString(reader["delivery_status"]) == "Доставлено" && Convert.ToString(reader["payment_status"]) == "Оплачено")
+                        {
+                            count++;
+                        }
+                    }
+                }
+
+                if (count == count_rows)
+                {
+                    string update_sql = string.Format("UPDATE orderr SET order_status = 'Заказ отправлен клиенту' WHERE id = '{0}'", id);
+                    NpgsqlCommand update_command = new NpgsqlCommand(update_sql, con);
+                    update_command.ExecuteNonQuery();
+                    UpdateOrders();
+                }
+                else
+                {
+                    MessageBox.Show("Ошибка. Не все товары готовы к отправке.");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+
+
+        }
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+        private void OrderForm_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void orderGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
         }
     }
 }

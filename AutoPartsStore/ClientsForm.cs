@@ -16,11 +16,13 @@ namespace AutoPartsStore
     {
         NpgsqlConnection con;
         int id;
-        DataTable dt = new DataTable();
-        DataSet ds = new DataSet();
+        DataTable dt;
+        DataSet ds;
         public ClientsForm(NpgsqlConnection con)
         {
             this.con = con;
+            dt = new DataTable();
+            ds = new DataSet();
             InitializeComponent();
             Update();
         }
@@ -37,12 +39,11 @@ namespace AutoPartsStore
                 email.Text = "";
                 da.Fill(ds);
                 dt = ds.Tables[0];
-                dataGridView1.DataSource = dt;
-                dataGridView1.Columns[0].HeaderText = "Номер";
-                dataGridView1.Columns[1].HeaderText = "Имя";
-                dataGridView1.Columns[2].HeaderText = "Телефон";
-                dataGridView1.Columns[3].HeaderText = "Почта";
-                this.StartPosition = FormStartPosition.CenterScreen;
+                clientsGridView.DataSource = dt;
+                clientsGridView.Columns[0].HeaderText = "Номер";
+                clientsGridView.Columns[1].HeaderText = "Имя";
+                clientsGridView.Columns[2].HeaderText = "Телефон";
+                clientsGridView.Columns[3].HeaderText = "Почта";
             } catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
@@ -79,7 +80,7 @@ namespace AutoPartsStore
             var result = MessageBox.Show(message, caption, MessageBoxButtons.YesNo);
             if (result == DialogResult.Yes)
             {
-                int id = (int) dataGridView1.CurrentRow.Cells["id"].Value;
+                int id = (int)clientsGridView.CurrentRow.Cells["id"].Value;
                 try
                 {
                     NpgsqlCommand command = new NpgsqlCommand("DELETE FROM client WHERE id = :id", con);
@@ -95,9 +96,9 @@ namespace AutoPartsStore
         }
 
 
-        private void dataGridView1_SelectionChanged(object sender, EventArgs e)
+        private void clientsGridView_SelectionChanged(object sender, EventArgs e)
         {
-            DataGridViewSelectedRowCollection selectedRows = dataGridView1.SelectedRows;
+            DataGridViewSelectedRowCollection selectedRows = clientsGridView.SelectedRows;
             if (selectedRows.Count > 0)
             {
                 DataGridViewRow row = selectedRows[0];
@@ -116,7 +117,7 @@ namespace AutoPartsStore
         {
 
         }
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        private void clientsGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
         }

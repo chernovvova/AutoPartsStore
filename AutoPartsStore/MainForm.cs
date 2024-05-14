@@ -54,5 +54,10 @@ namespace AutoPartsStore
             OrderInfoForm orderInfoForm = new OrderInfoForm(con);
             orderInfoForm.ShowDialog();
         }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

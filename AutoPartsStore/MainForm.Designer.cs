@@ -33,11 +33,12 @@
             storageButton = new Button();
             orderButton = new Button();
             orderInfoButton = new Button();
+            label1 = new Label();
             SuspendLayout();
             // 
             // clientButton
             // 
-            clientButton.Location = new Point(87, 247);
+            clientButton.Location = new Point(136, 352);
             clientButton.Name = "clientButton";
             clientButton.Size = new Size(124, 73);
             clientButton.TabIndex = 0;
@@ -47,7 +48,7 @@
             // 
             // productButton
             // 
-            productButton.Location = new Point(232, 247);
+            productButton.Location = new Point(276, 352);
             productButton.Name = "productButton";
             productButton.Size = new Size(124, 73);
             productButton.TabIndex = 1;
@@ -57,7 +58,7 @@
             // 
             // storageButton
             // 
-            storageButton.Location = new Point(382, 247);
+            storageButton.Location = new Point(421, 352);
             storageButton.Name = "storageButton";
             storageButton.Size = new Size(124, 73);
             storageButton.TabIndex = 2;
@@ -67,7 +68,7 @@
             // 
             // orderButton
             // 
-            orderButton.Location = new Point(535, 247);
+            orderButton.Location = new Point(571, 352);
             orderButton.Name = "orderButton";
             orderButton.Size = new Size(124, 73);
             orderButton.TabIndex = 3;
@@ -77,7 +78,7 @@
             // 
             // orderInfoButton
             // 
-            orderInfoButton.Location = new Point(700, 247);
+            orderInfoButton.Location = new Point(718, 352);
             orderInfoButton.Name = "orderInfoButton";
             orderInfoButton.Size = new Size(124, 73);
             orderInfoButton.TabIndex = 4;
@@ -85,20 +86,35 @@
             orderInfoButton.UseVisualStyleBackColor = true;
             orderInfoButton.Click += orderInfoButton_Click;
             // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Font = new Font("Segoe UI", 35F, FontStyle.Regular, GraphicsUnit.Point);
+            label1.Location = new Point(223, 159);
+            label1.Name = "label1";
+            label1.Size = new Size(535, 62);
+            label1.TabIndex = 5;
+            label1.Text = "Магазин автозапчастей";
+            label1.Click += label1_Click;
+            // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1005, 644);
+            ClientSize = new Size(948, 644);
+            ControlBox = false;
+            Controls.Add(label1);
             Controls.Add(orderInfoButton);
             Controls.Add(orderButton);
             Controls.Add(storageButton);
             Controls.Add(productButton);
             Controls.Add(clientButton);
             Name = "MainForm";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "Main";
             Load += MainForm_Load;
             ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
@@ -108,5 +124,6 @@
         private Button storageButton;
         private Button orderButton;
         private Button orderInfoButton;
+        private Label label1;
     }
 }

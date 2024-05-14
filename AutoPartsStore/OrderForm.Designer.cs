@@ -48,6 +48,9 @@ namespace AutoPartsStore
             addressTextBox = new TextBox();
             paymentButton = new Button();
             exportToExcel = new Button();
+            label6 = new Label();
+            label7 = new Label();
+            sendOrder = new Button();
             ((System.ComponentModel.ISupportInitialize)orderGridView).BeginInit();
             ((System.ComponentModel.ISupportInitialize)productGridView).BeginInit();
             menuStrip1.SuspendLayout();
@@ -55,21 +58,24 @@ namespace AutoPartsStore
             // 
             // orderGridView
             // 
+            orderGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            orderGridView.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
             orderGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             orderGridView.Location = new Point(0, 87);
             orderGridView.Name = "orderGridView";
-            orderGridView.Size = new Size(549, 190);
+            orderGridView.Size = new Size(710, 190);
             orderGridView.TabIndex = 0;
             orderGridView.CellContentClick += orderGridView_CellContentClick;
             orderGridView.SelectionChanged += orderGridView_SelectionChanged;
             // 
             // productGridView
             // 
-            productGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.ColumnHeader;
+            productGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            productGridView.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
             productGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            productGridView.Location = new Point(641, 87);
+            productGridView.Location = new Point(767, 87);
             productGridView.Name = "productGridView";
-            productGridView.Size = new Size(539, 190);
+            productGridView.Size = new Size(636, 190);
             productGridView.TabIndex = 1;
             productGridView.SelectionChanged += productGridView_SelectionChanged;
             // 
@@ -78,7 +84,7 @@ namespace AutoPartsStore
             menuStrip1.Items.AddRange(new ToolStripItem[] { addToolStripMenuItem, updateToolStripMenuItem, deleteToolStripMenuItem });
             menuStrip1.Location = new Point(0, 0);
             menuStrip1.Name = "menuStrip1";
-            menuStrip1.Size = new Size(1180, 24);
+            menuStrip1.Size = new Size(1415, 24);
             menuStrip1.TabIndex = 2;
             menuStrip1.Text = "menuStrip1";
             // 
@@ -92,8 +98,8 @@ namespace AutoPartsStore
             // updateToolStripMenuItem
             // 
             updateToolStripMenuItem.Name = "updateToolStripMenuItem";
-            updateToolStripMenuItem.Size = new Size(73, 20);
-            updateToolStripMenuItem.Text = "Обновить";
+            updateToolStripMenuItem.Size = new Size(107, 20);
+            updateToolStripMenuItem.Text = "Обновить адрес";
             updateToolStripMenuItem.Click += updateToolStripMenuItem_Click;
             // 
             // deleteToolStripMenuItem
@@ -125,7 +131,7 @@ namespace AutoPartsStore
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(641, 302);
+            label2.Location = new Point(767, 302);
             label2.Name = "label2";
             label2.Size = new Size(48, 15);
             label2.TabIndex = 6;
@@ -135,7 +141,7 @@ namespace AutoPartsStore
             // productComboBox
             // 
             productComboBox.FormattingEnabled = true;
-            productComboBox.Location = new Point(641, 320);
+            productComboBox.Location = new Point(767, 320);
             productComboBox.Name = "productComboBox";
             productComboBox.Size = new Size(121, 23);
             productComboBox.TabIndex = 5;
@@ -143,7 +149,7 @@ namespace AutoPartsStore
             // 
             // addProductButton
             // 
-            addProductButton.Location = new Point(641, 360);
+            addProductButton.Location = new Point(767, 360);
             addProductButton.Name = "addProductButton";
             addProductButton.Size = new Size(172, 29);
             addProductButton.TabIndex = 7;
@@ -153,7 +159,7 @@ namespace AutoPartsStore
             // 
             // countProductTextBox
             // 
-            countProductTextBox.Location = new Point(807, 320);
+            countProductTextBox.Location = new Point(933, 320);
             countProductTextBox.Name = "countProductTextBox";
             countProductTextBox.Size = new Size(122, 23);
             countProductTextBox.TabIndex = 8;
@@ -161,7 +167,7 @@ namespace AutoPartsStore
             // 
             // sumTextBox
             // 
-            sumTextBox.Location = new Point(962, 320);
+            sumTextBox.Location = new Point(1088, 320);
             sumTextBox.Name = "sumTextBox";
             sumTextBox.ReadOnly = true;
             sumTextBox.Size = new Size(122, 23);
@@ -171,7 +177,7 @@ namespace AutoPartsStore
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(807, 302);
+            label3.Location = new Point(933, 302);
             label3.Name = "label3";
             label3.Size = new Size(72, 15);
             label3.TabIndex = 10;
@@ -181,7 +187,7 @@ namespace AutoPartsStore
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new Point(962, 302);
+            label4.Location = new Point(1088, 302);
             label4.Name = "label4";
             label4.Size = new Size(45, 15);
             label4.TabIndex = 11;
@@ -206,9 +212,9 @@ namespace AutoPartsStore
             // 
             // paymentButton
             // 
-            paymentButton.Location = new Point(962, 360);
+            paymentButton.Location = new Point(1271, 313);
             paymentButton.Name = "paymentButton";
-            paymentButton.Size = new Size(144, 29);
+            paymentButton.Size = new Size(144, 38);
             paymentButton.TabIndex = 14;
             paymentButton.Text = "Товар оплачен";
             paymentButton.UseVisualStyleBackColor = true;
@@ -216,19 +222,52 @@ namespace AutoPartsStore
             // 
             // exportToExcel
             // 
-            exportToExcel.Location = new Point(12, 502);
+            exportToExcel.Location = new Point(12, 481);
             exportToExcel.Name = "exportToExcel";
-            exportToExcel.Size = new Size(98, 44);
+            exportToExcel.Size = new Size(108, 44);
             exportToExcel.TabIndex = 15;
             exportToExcel.Text = "Экспорт данных в Excel";
             exportToExcel.UseVisualStyleBackColor = true;
             exportToExcel.Click += exportToExcelButton;
             // 
+            // label6
+            // 
+            label6.AutoSize = true;
+            label6.Font = new Font("Segoe UI", 14F, FontStyle.Regular, GraphicsUnit.Point);
+            label6.Location = new Point(293, 46);
+            label6.Name = "label6";
+            label6.Size = new Size(72, 25);
+            label6.TabIndex = 16;
+            label6.Text = "Заказы";
+            // 
+            // label7
+            // 
+            label7.AutoSize = true;
+            label7.Font = new Font("Segoe UI", 14F, FontStyle.Regular, GraphicsUnit.Point);
+            label7.Location = new Point(1012, 46);
+            label7.Name = "label7";
+            label7.Size = new Size(152, 25);
+            label7.TabIndex = 17;
+            label7.Text = "Товары в заказе";
+            // 
+            // sendOrder
+            // 
+            sendOrder.Location = new Point(527, 311);
+            sendOrder.Name = "sendOrder";
+            sendOrder.Size = new Size(192, 38);
+            sendOrder.TabIndex = 18;
+            sendOrder.Text = "Отправить заказ клиенту";
+            sendOrder.UseVisualStyleBackColor = true;
+            sendOrder.Click += sendOrder_Click;
+            // 
             // OrderForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1180, 558);
+            ClientSize = new Size(1415, 558);
+            Controls.Add(sendOrder);
+            Controls.Add(label7);
+            Controls.Add(label6);
             Controls.Add(exportToExcel);
             Controls.Add(paymentButton);
             Controls.Add(addressTextBox);
@@ -298,5 +337,8 @@ namespace AutoPartsStore
         private TextBox addressTextBox;
         private Button paymentButton;
         private Button exportToExcel;
+        private Label label6;
+        private Label label7;
+        private Button sendOrder;
     }
 }

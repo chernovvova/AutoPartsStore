@@ -50,27 +50,27 @@ namespace AutoPartsStore
                 MessageBox.Show(ex.Message);
             }
         }
-        
+
 
         private void updateToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            try 
+            try
             {
                 string sql = string.Format("UPDATE storage SET count = '{0}', last_update_date = '{1}' WHERE id = '{2}'", Convert.ToInt32(count.Text), DateTime.Now, id);
-                NpgsqlCommand command = new NpgsqlCommand(sql, con); 
+                NpgsqlCommand command = new NpgsqlCommand(sql, con);
                 command.ExecuteNonQuery();
                 Update();
             }
-            catch (Exception ex) 
-            { 
-                MessageBox.Show(ex.Message); 
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
             }
         }
 
         private void dataGridView1_SelectionChanged(object sender, EventArgs e)
         {
             DataGridViewSelectedRowCollection selectedRows = dataGridView1.SelectedRows;
-            if(selectedRows.Count > 0)
+            if (selectedRows.Count > 0)
             {
                 DataGridViewRow dataGridViewRow = selectedRows[0];
                 id = Convert.ToInt32(dataGridViewRow.Cells[0].Value);
@@ -82,7 +82,7 @@ namespace AutoPartsStore
                     NpgsqlCommand command = new NpgsqlCommand(request, con);
                     using (NpgsqlDataReader reader = command.ExecuteReader())
                     {
-                        if(reader.Read())
+                        if (reader.Read())
                         {
                             product_name.Text = reader["name"].ToString();
                             product_description.Text = reader["description"].ToString();
@@ -107,6 +107,11 @@ namespace AutoPartsStore
         }
 
         private void label3_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
         }

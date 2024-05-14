@@ -33,19 +33,25 @@
             createToolStripMenuItem = new ToolStripMenuItem();
             updateToolStripMenuItem = new ToolStripMenuItem();
             deleteToolStripMenuItem = new ToolStripMenuItem();
-            name = new TextBox();
-            description = new TextBox();
             price = new TextBox();
+            label1 = new Label();
+            label2 = new Label();
+            label3 = new Label();
+            label4 = new Label();
+            description = new RichTextBox();
+            name = new RichTextBox();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             menuStrip1.SuspendLayout();
             SuspendLayout();
             // 
             // dataGridView1
             // 
+            dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dataGridView1.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridView1.Location = new Point(0, 27);
             dataGridView1.Name = "dataGridView1";
-            dataGridView1.Size = new Size(444, 246);
+            dataGridView1.Size = new Size(614, 246);
             dataGridView1.TabIndex = 0;
             dataGridView1.CellContentClick += dataGridView1_CellContentClick;
             dataGridView1.SelectionChanged += dataGridView1_SelectionChanged;
@@ -55,7 +61,7 @@
             menuStrip1.Items.AddRange(new ToolStripItem[] { createToolStripMenuItem, updateToolStripMenuItem, deleteToolStripMenuItem });
             menuStrip1.Location = new Point(0, 0);
             menuStrip1.Name = "menuStrip1";
-            menuStrip1.Size = new Size(800, 24);
+            menuStrip1.Size = new Size(982, 24);
             menuStrip1.TabIndex = 1;
             menuStrip1.Text = "menuStrip1";
             // 
@@ -80,35 +86,79 @@
             deleteToolStripMenuItem.Text = "Удалить";
             deleteToolStripMenuItem.Click += deleteToolStripMenuItem_Click;
             // 
-            // name
+            // price
             // 
-            name.Location = new Point(25, 317);
-            name.Name = "name";
-            name.Size = new Size(153, 23);
-            name.TabIndex = 2;
+            price.Location = new Point(687, 376);
+            price.Name = "price";
+            price.Size = new Size(244, 23);
+            price.TabIndex = 4;
+            price.TextChanged += price_TextChanged;
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Font = new Font("Segoe UI", 14F, FontStyle.Regular, GraphicsUnit.Point);
+            label1.Location = new Point(688, 27);
+            label1.Name = "label1";
+            label1.Size = new Size(208, 25);
+            label1.TabIndex = 5;
+            label1.Text = "Информация о товаре";
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Location = new Point(688, 65);
+            label2.Name = "label2";
+            label2.Size = new Size(99, 15);
+            label2.TabIndex = 6;
+            label2.Text = "Название товара";
+            // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Location = new Point(688, 163);
+            label3.Name = "label3";
+            label3.Size = new Size(62, 15);
+            label3.TabIndex = 7;
+            label3.Text = "Описание";
+            // 
+            // label4
+            // 
+            label4.AutoSize = true;
+            label4.Location = new Point(687, 358);
+            label4.Name = "label4";
+            label4.Size = new Size(35, 15);
+            label4.TabIndex = 8;
+            label4.Text = "Цена";
             // 
             // description
             // 
-            description.Location = new Point(25, 375);
+            description.Location = new Point(687, 181);
             description.Name = "description";
-            description.Size = new Size(153, 23);
-            description.TabIndex = 3;
+            description.Size = new Size(245, 174);
+            description.TabIndex = 9;
+            description.Text = "";
             // 
-            // price
+            // name
             // 
-            price.Location = new Point(25, 435);
-            price.Name = "price";
-            price.Size = new Size(153, 23);
-            price.TabIndex = 4;
+            name.Location = new Point(688, 83);
+            name.Name = "name";
+            name.Size = new Size(244, 63);
+            name.TabIndex = 10;
+            name.Text = "";
             // 
             // ProductForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 549);
-            Controls.Add(price);
-            Controls.Add(description);
+            ClientSize = new Size(982, 549);
             Controls.Add(name);
+            Controls.Add(description);
+            Controls.Add(label4);
+            Controls.Add(label3);
+            Controls.Add(label2);
+            Controls.Add(label1);
+            Controls.Add(price);
             Controls.Add(dataGridView1);
             Controls.Add(menuStrip1);
             MainMenuStrip = menuStrip1;
@@ -129,8 +179,12 @@
         private ToolStripMenuItem createToolStripMenuItem;
         private ToolStripMenuItem updateToolStripMenuItem;
         private ToolStripMenuItem deleteToolStripMenuItem;
-        private TextBox name;
-        private TextBox description;
         private TextBox price;
+        private Label label1;
+        private Label label2;
+        private Label label3;
+        private Label label4;
+        private RichTextBox description;
+        private RichTextBox name;
     }
 }
