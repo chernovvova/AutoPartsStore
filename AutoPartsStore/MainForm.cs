@@ -16,7 +16,7 @@ namespace AutoPartsStore
             this.StartPosition = FormStartPosition.CenterScreen;
             try
             {
-                this.con = new NpgsqlConnection("Server=localhost; Port = 8000; UserID=postgres; Password = 1936629; Database = AutoPartsStore");
+                this.con = new NpgsqlConnection("Server=localhost; Port = 8000; UserID=postgres; Password = ; Database = AutoPartsStore");
                 con.Open();
             }
             catch (Exception ex)
